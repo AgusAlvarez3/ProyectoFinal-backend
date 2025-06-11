@@ -12,6 +12,20 @@ router.get('/', async (req, res) => {
   }
 });
 
+// GET /categorias/:id - Obtener una categoría por su ID
+router.get('/:id', async (req, res) => {
+  try {
+    const categoria = await Categoria.findByPk(req.params.id);
+    if (!categoria) {
+      return res.status(404).json({ error: 'Categoría no encontrada' });
+    }
+
+    res.json(categoria);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener la categoría' });
+  }
+});
+
 // POST /categorias - Crear una nueva categoría
 router.post('/', async (req, res) => {
   try {
@@ -62,5 +76,25 @@ router.put('/:id', async (req, res) => {
     res.status(500).json({ error: 'Error al actualizar la categoría', detalles: error.message });
   }
 });
+
+// DELETE /categorias/:id - Eliminar una categoría por su ID
+router.delete('/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const categoria = await Categoria.findByPk(id);
+
+    if (!categoria) {
+      return res.status(404).json({ error: 'Categoría no encontrada' });
+    }
+
+    await categoria.destroy();
+
+    res.json({ mensaje: 'Categoría eliminada con éxito' });
+  } catch (error) {
+    res.status(500).json({ error: 'Error al eliminar la categoría', detalles: error.message });
+  }
+});
+
 
 module.exports = router;
