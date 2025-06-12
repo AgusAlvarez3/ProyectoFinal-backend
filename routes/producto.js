@@ -24,7 +24,6 @@ router.post('/', async (req, res) => {
     try {
       const { nombre, descripcion, precio, stock, imagen_url, categoria_id } = req.body;
   
-      // Validaciones manuales
       if (!nombre || nombre.trim() === '') {
         return res.status(400).json({ error: 'El nombre del producto es obligatorio.' });
       }
@@ -59,7 +58,7 @@ router.post('/', async (req, res) => {
   });
   
 
-//Delete productos:id - eliminar un producto por su ID
+//Eliminar productos:id - eliminar un producto por su ID
 router.delete('/:id', async (req, res) =>{
     try {
         const id= req.params.id;

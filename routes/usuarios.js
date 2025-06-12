@@ -7,7 +7,7 @@ router.post('/', async (req, res) => {
   try {
     const { nombre, email, password, es_admin } = req.body;
 
-    // Validaciones básicas
+
     if (!nombre || !email || !password) {
       return res.status(400).json({ error: 'Nombre, email y contraseña son obligatorios.' });
     }
@@ -38,7 +38,6 @@ router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Validaciones básicas
     if (!email || !password) {
       return res.status(400).json({ error: 'Email y contraseña son obligatorios.' });
     }
